@@ -5,7 +5,7 @@ import json
 import src.backend.notion_api as nback
 import src.cleaning.parsing_database_data as cleaning_data
 import draw_mermaid
-
+import excluding_categories
 
 id_text = 'a942b4ba43f744eabf590a485617e466'
 id_conn = 'e53476c1606644b7ba9bd12a3e13d61b'
@@ -15,10 +15,11 @@ def update_mermaid_graph(id, conn = None):
     res = cur = None
     cur = nback.parse_data(id)
     cur = cleaning_data.get_info(cur)
+
     #####
-    name = 'properties.Name.title'
-    cur = cur[['id', name]]
-    cur[name] = cur[name].apply(lambda x: x[0]['text']['content'])
+
+    #####
+    cur = excluding_categories.exclude_fields(cur, 'properties.Name.title' )
     #####
     nodes = draw_mermaid.draw_nodes(cur)
     #####
