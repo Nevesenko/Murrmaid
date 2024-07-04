@@ -15,14 +15,10 @@ def update_mermaid_graph(id, conn = None):
     res = cur = None
     cur = nback.parse_data(id)
     cur = cleaning_data.get_info(cur)
-
-    #####
-
-    #####
-    cur = excluding_categories.exclude_fields(cur, 'properties.Name.title' )
-    #####
+    cur = excluding_categories.exclude_title_fields(cur, 'properties.Name.title' )
     nodes = draw_mermaid.draw_nodes(cur)
     #####
+
     conns = nback.parse_data(conn)
     conns = cleaning_data.get_info(conns)
     conns = conns[['properties.Child.relation','properties.Parent.relation']]
