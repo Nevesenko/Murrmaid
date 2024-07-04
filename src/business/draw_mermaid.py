@@ -7,7 +7,6 @@ import requests
 def draw_nodes(df):
     res = []
     for item, name in zip(df['id'], df['properties.Name.title']):
-        print(item, name)
         res.append(item + '(' + name + ')')
     return res
 

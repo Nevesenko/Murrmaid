@@ -26,6 +26,6 @@ def update_mermaid_graph(id, conn = None):
     connections = draw_mermaid.draw_graph(conns)
     final_string = draw_mermaid.form_the_graph_schema(nodes, connections)
     body = {  "code": {"rich_text": [{"type": "text","text": {"content": final_string}}],"language": "mermaid"}}
-    nback.patch_block('3214708db6884b5b94d11e5aef0c78b7', body)
-
+    res = nback.patch_block('3214708db6884b5b94d11e5aef0c78b7', body)
+    print(res.ok)
 update_mermaid_graph(id_text, id_conn)
